@@ -42,6 +42,7 @@ void Wifi::scanAvailableNetworks()
   
   for (int i = 0; i < n; ++i)
   {
+    delay(10);
     std::string newNetwork = WiFi.SSID(i).c_str();
     bool DoesListAlreadyContainNetwork = false;
     for (std::string network : availableNetworks) {
