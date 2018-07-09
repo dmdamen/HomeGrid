@@ -22,6 +22,92 @@ std::string Views::configPage(std::string deviceName, std::vector <std::string> 
   content += "<meta charset=\"utf-8\" />";
   content += "<title>HomeGrid device configuration page</title>";
 
+  content += style();
+
+  content += "</head>";
+
+  content += "<body>";
+
+  content += "<div id=\"contact\">";
+  content += "  <h1>HomeGrid</h1>";
+  content += "<form action=\"set\" method=\"post\">";
+  content += "    <fieldset>";
+  
+  content += "  <h2>Device settings</h2>";
+  content += "      <label for=\"name\">Name:</label>";
+  content += "      <input type=\"text\" name=\"name\" id=\"name\" placeholder=\"Unique name for this device\" value=\"" + deviceName + "\"/>";
+
+  content += "  <h2>WiFi settings</h2>";
+  content += "      <label for=\"network\">Network:</label>";
+  content += "      <select name=\"network\" id=\"network\"/>";
+
+  for (std::string network : availableNetworks) {
+    if (network == wifiName) {
+      content += "        <option value=\"" + network + "\" selected>" + network + "</option>";
+    } else {
+      content += "        <option value=\"" + network + "\">" + network + "</option>"; 
+    }
+  }
+  
+  content += "      </select>";
+
+  content += "      <label for=\"password\">Password:</label>";
+  content += "      <input type=\"password\" name=\"pass\" id=\"password\" placeholder=\"WiFi password\" value = \"" + wifiPass + "\"/>";
+
+  content += "  <h2>MQTT settings</h2>";
+      
+  content += "      <label for=\"mqtt_server\">Server:</label>";
+  content += "      <input type=\"text\" id=\"mqtt_server\" placeholder=\"Server name (FQDN)\" />";
+
+  content += "      <label for=\"mqtt_fingerprint\">Certificate:</label>";
+  content += "      <input type=\"text\" id=\"mqtt_fingerprint\" placeholder=\"Server certificate fingerprint\" />";
+  
+  content += "      <label for=\"mqtt_user\">Username:</label>";
+  content += "      <input type=\"text\" id=\"mqtt_server\" placeholder=\"Enter the username\" />";
+  
+  content += "      <label for=\"mqtt_password\">Password:</label>";
+  content += "      <input type=\"password\" id=\"mqtt_server\" placeholder=\"Enter the password\" />";
+      
+  content += "      <input type=\"submit\" value=\"Save\" />";
+      
+  content += "    </fieldset>";
+  content += "  </form>";
+  content += "</div>";
+
+  content += "</body>";
+  content += "</html>";
+
+  return content;
+}
+
+std::string Views::rebootPage()
+{
+  std::string content;
+  content = "<!DOCTYPE html>";
+  content += "<html>";
+  content += "<head>";
+  content += "<meta charset=\"utf-8\" />";
+  content += "<title>HomeGrid device configuration page</title>";
+
+  content += style();
+  
+  content += "</head>";
+
+  content += "<body>";
+
+  content += "<div id=\"contact\">";
+  content += "  <h1>Rebooting...</h1>";
+  content += "</div>";
+
+  content += "</body>";
+  content += "</html>";
+
+  return content;
+}
+
+std::string Views::style()
+{
+  std::string content;
   content += "<style>";
   content += "body, div, h1, form, fieldset, input, textarea {";
   content += "  margin: 0; padding: 0; border: 0; outline: none;";
@@ -119,62 +205,6 @@ std::string Views::configPage(std::string deviceName, std::vector <std::string> 
   content += "}";
 
   content += "</style>";
-
-  content += "</head>";
-
-  content += "<body>";
-
-  content += "<div id=\"contact\">";
-  content += "  <h1>HomeGrid</h1>";
-  content += "<form action=\"set\" method=\"post\">";
-  content += "    <fieldset>";
-  
-  content += "  <h2>Device settings</h2>";
-  content += "      <label for=\"name\">Name:</label>";
-  content += "      <input type=\"text\" name=\"name\" id=\"name\" placeholder=\"Unique name for this device\" value=\"" + deviceName + "\"/>";
-
-  content += "  <h2>WiFi settings</h2>";
-  content += "      <label for=\"network\">Network:</label>";
-  content += "      <select name=\"network\" id=\"network\"/>";
-
-  for (std::string network : availableNetworks) {
-    if (network == wifiName) {
-      content += "        <option value=\"" + network + "\" selected>" + network + "</option>";
-    } else {
-      content += "        <option value=\"" + network + "\">" + network + "</option>"; 
-    }
-  }
-  
-  content += "      </select>";
-
-  content += "      <label for=\"password\">Password:</label>";
-  content += "      <input type=\"password\" name=\"pass\" id=\"password\" placeholder=\"WiFi password\" value = \"" + wifiPass + "\"/>";
-
-  content += "  <h2>MQTT settings</h2>";
-      
-  content += "      <label for=\"mqtt_server\">Server:</label>";
-  content += "      <input type=\"text\" id=\"mqtt_server\" placeholder=\"Server name (FQDN)\" />";
-
-  content += "      <label for=\"mqtt_fingerprint\">Certificate:</label>";
-  content += "      <input type=\"text\" id=\"mqtt_fingerprint\" placeholder=\"Server certificate fingerprint\" />";
-  
-  content += "      <label for=\"mqtt_user\">Username:</label>";
-  content += "      <input type=\"text\" id=\"mqtt_server\" placeholder=\"Enter the username\" />";
-  
-  content += "      <label for=\"mqtt_password\">Password:</label>";
-  content += "      <input type=\"password\" id=\"mqtt_server\" placeholder=\"Enter the password\" />";
-      
-  content += "      <input type=\"submit\" value=\"Save\" />";
-      
-  content += "    </fieldset>";
-  content += "  </form>";
-  content += "</div>";
-
-  content += "</body>";
-  content += "</html>";
-
   return content;
 }
-
-
 

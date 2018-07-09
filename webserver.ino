@@ -27,13 +27,25 @@ void ws_setupRoutes()
     configStore->setWifiName(ws.arg("network").c_str());
     configStore->setWifiPass(ws.arg("pass").c_str());
     
-    ws.send(200, "text/html", "Device is rebooting");
+    Views* vw = Views::getInstance();
+    std::string content = vw->rebootPage();
+    ws.send(200, "text/html", content.c_str());
+
+    delay(2000);
+    
     ESP.restart();
   });
 
   ws.on("/reset" , []() {
     Store* configStore = Store::getInstance();
     configStore->erase();
+
+    Views* vw = Views::getInstance();
+    std::string content = vw->rebootPage();
+    ws.send(200, "text/html", content.c_str());
+    
+    delay(2000);
+    
     ESP.restart();
   });
 }
