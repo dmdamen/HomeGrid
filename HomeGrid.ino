@@ -8,14 +8,13 @@
 void setup() {
 
   Serial.begin(115200);
-  delay(5000);
-  
   Serial.println("Booting");
 
   boolean isConfigOk = true;
 
   Store* myConfig = Store::getInstance();
   if (myConfig == NULL) {Serial.println("Error initializing EEPROM"); delay(2000); ESP.restart();}
+  
   if (myConfig->getDeviceName() == "") { Serial.println("Device name not set"); isConfigOk = false;}
 
   Wifi*  myWifi = Wifi::getInstance();

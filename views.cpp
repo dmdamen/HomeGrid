@@ -13,7 +13,7 @@ Views* Views::getInstance()
 
 Views::Views() {}
 
-std::string Views::configPage(std::string deviceName, std::vector <std::string> availableNetworks, std::string wifiName, std::string wifiPass)
+std::string Views::configPage(std::string deviceName, std::vector <std::string> availableNetworks, std::string wifiName, std::string wifiPass, std::string mqttServer, std::string mqttFprint, std::string mqttUser, std::string mqttPass)
 {
   std::string content;
   content = "<!DOCTYPE html>";
@@ -57,16 +57,16 @@ std::string Views::configPage(std::string deviceName, std::vector <std::string> 
   content += "  <h2>MQTT settings</h2>";
       
   content += "      <label for=\"mqtt_server\">Server:</label>";
-  content += "      <input type=\"text\" id=\"mqtt_server\" placeholder=\"Server name (FQDN)\" />";
+  content += "      <input type=\"text\" name=\"mqtt_server\" id=\"mqtt_server\" placeholder=\"Server name (FQDN)\" value = \"" + mqttServer + "\"/>";
 
   content += "      <label for=\"mqtt_fingerprint\">Certificate:</label>";
-  content += "      <input type=\"text\" id=\"mqtt_fingerprint\" placeholder=\"Server certificate fingerprint\" />";
+  content += "      <input type=\"text\" name=\"mqtt_fingerprint\" id=\"mqtt_fingerprint\" placeholder=\"Server certificate fingerprint\" value = \"" + mqttFprint + "\"/>";
   
   content += "      <label for=\"mqtt_user\">Username:</label>";
-  content += "      <input type=\"text\" id=\"mqtt_server\" placeholder=\"Enter the username\" />";
+  content += "      <input type=\"text\" name=\"mqtt_user\" id=\"mqtt_user\" placeholder=\"Enter the username\" value = \"" + mqttUser + "\"/>";
   
   content += "      <label for=\"mqtt_password\">Password:</label>";
-  content += "      <input type=\"password\" id=\"mqtt_server\" placeholder=\"Enter the password\" />";
+  content += "      <input type=\"password\" name=\"mqtt_pass\" id=\"mqtt_pass\" placeholder=\"Enter the password\" value = \"" + mqttPass + "\"/>";
       
   content += "      <input type=\"submit\" value=\"Save\" />";
       

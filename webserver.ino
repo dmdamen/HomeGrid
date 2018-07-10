@@ -16,7 +16,8 @@ void ws_setupRoutes()
     Store* configStore = Store::getInstance();
     Wifi* wifi = Wifi::getInstance();
     
-    std::string content = vw->configPage(configStore->getDeviceName(), wifi->getNetworks(), configStore->getWifiName(), configStore->getWifiPass());
+    std::string content = vw->configPage(configStore->getDeviceName(), wifi->getNetworks(), configStore->getWifiName(), configStore->getWifiPass(), configStore->getMqttServerName(), configStore->getMqttServerFingerprint(), configStore->getMqttUser(), configStore->getMqttPass());
+   
     ws.send(200, "text/html", content.c_str());
   });
 
@@ -26,6 +27,12 @@ void ws_setupRoutes()
     configStore->setDeviceName(ws.arg("name").c_str());
     configStore->setWifiName(ws.arg("network").c_str());
     configStore->setWifiPass(ws.arg("pass").c_str());
+    configStore->setMqttUser(ws.arg("mqtt_user").c_str());
+    configStore->setMqttPass(ws.arg("mqtt_pass").c_str());
+    configStore->setMqttServerName(ws.arg("mqtt_server").c_str());
+    configStore->setMqttServerFingerprint(ws.arg("mqtt_fingerprint").c_str());
+
+  Serial.println();
     
     Views* vw = Views::getInstance();
     std::string content = vw->rebootPage();
@@ -33,7 +40,7 @@ void ws_setupRoutes()
 
     delay(2000);
     
-    ESP.restart();
+    ESP.restart();    
   });
 
   ws.on("/reset" , []() {
