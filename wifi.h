@@ -7,10 +7,11 @@ class Wifi {
 
   private:
     static Wifi* instance;
+    Wifi();
     
     std::vector <std::string> availableNetworks;
     void scanAvailableNetworks();
-    Wifi();
+    
 
   public:
     static Wifi* getInstance();
