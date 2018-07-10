@@ -2,6 +2,7 @@
 #include <EEPROM.h>
 #include <ESP8266WiFi.h>
 #include "FS.h"
+#include "mqtt.h"
 #include "views.h"
 #include "wifi.h"
 
@@ -19,6 +20,9 @@ void setup() {
 
   Wifi*  myWifi = Wifi::getInstance();
   if(!myWifi->connect(myConfig->getWifiName(), myConfig->getWifiPass())) { Serial.println("Failed to connect to WiFi"); isConfigOk = false;}
+
+  Mqtt* myMqtt = Mqtt::getInstance();
+  myMqtt->connect(myConfig->getMqttServerName(), myConfig->getMqttServerFingerprint(), myConfig->getMqttUser(), myConfig->getMqttPass());
 
   if (isConfigOk) 
   {
