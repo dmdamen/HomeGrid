@@ -72,8 +72,12 @@ std::string Wifi::getSoftApIp()
   return WiFi.softAPIP().toString().c_str();
 }
 
+std::string Wifi::getMacAddress()
+{
+  return WiFi.macAddress().c_str();
+}
+
 std::vector <std::string> Wifi::getNetworks()
 {
   return availableNetworks;
 }
-

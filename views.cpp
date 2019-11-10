@@ -59,8 +59,8 @@ std::string Views::configPage(std::string deviceName, std::vector <std::string> 
   content += "      <label for=\"mqtt_server\">Server:</label>";
   content += "      <input type=\"text\" name=\"mqtt_server\" id=\"mqtt_server\" placeholder=\"Server name (FQDN)\" value = \"" + mqttServer + "\"/>";
 
-  content += "      <label for=\"mqtt_fingerprint\">Certificate:</label>";
-  content += "      <input type=\"text\" name=\"mqtt_fingerprint\" id=\"mqtt_fingerprint\" placeholder=\"Server certificate fingerprint\" value = \"" + mqttFprint + "\"/>";
+  //content += "      <label for=\"mqtt_fingerprint\">Certificate:</label>";
+  //content += "      <input type=\"text\" name=\"mqtt_fingerprint\" id=\"mqtt_fingerprint\" placeholder=\"Server certificate fingerprint\" value = \"" + mqttFprint + "\"/>";
   
   content += "      <label for=\"mqtt_user\">Username:</label>";
   content += "      <input type=\"text\" name=\"mqtt_user\" id=\"mqtt_user\" placeholder=\"Enter the username\" value = \"" + mqttUser + "\"/>";
@@ -207,4 +207,3 @@ std::string Views::style()
   content += "</style>";
   return content;
 }
-

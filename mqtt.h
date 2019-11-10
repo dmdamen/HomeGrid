@@ -3,20 +3,49 @@
 
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
+#include <vector>
 #include "store.h"
+
+struct callbackItem {
+  std::string topic;
+  void (*callback)(std::string*);
+};
 
 class Mqtt {
 
   private:
     static Mqtt* instance;
     Mqtt();
-    WiFiClientSecure secureClient;
+
+    Store* myStore;
+
+    static std::vector<callbackItem>* callbackItems;
+    
+    //WiFiClientSecure secureClient;
+    WiFiClient Client;
     PubSubClient mqttClient;
+
+    //void (*callback)(std::string*);
+
+    std::string getWillTopic();
+    std::string getWillMsg();
+    std::string getBirthTopic();
+    std::string getBirthMsg();
+
+    static void mqttCallback(char*, byte*, unsigned int);
     
   public:
     static Mqtt* getInstance();
-    bool connect(std::string, std::string, std::string, std::string);
-    static void mqtt_callback(char*, byte*, unsigned int);  
+    static std::vector<callbackItem>* getCallbackItems();
+    void publish(std::string, std::string); 
+    
+    //bool connect(std::string, std::string, std::string, std::string);
+    bool connect(std::string, std::string, std::string);
+    bool reconnect();
+    void subscribe(std::string, void (*)(std::string*));
+    
+    
+    void loop();
 };
 
 #endif

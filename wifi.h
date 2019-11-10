@@ -20,6 +20,7 @@ class Wifi {
     boolean startAP(std::string, std::string);
     std::string getLocalIp();
     std::string getSoftApIp();
+    std::string getMacAddress();
 };
 
 #endif

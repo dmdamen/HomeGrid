@@ -30,7 +30,7 @@ void ws_setupRoutes()
     configStore->setMqttUser(ws.arg("mqtt_user").c_str());
     configStore->setMqttPass(ws.arg("mqtt_pass").c_str());
     configStore->setMqttServerName(ws.arg("mqtt_server").c_str());
-    configStore->setMqttServerFingerprint(ws.arg("mqtt_fingerprint").c_str());
+    //configStore->setMqttServerFingerprint(ws.arg("mqtt_fingerprint").c_str());
 
   Serial.println();
     
@@ -69,4 +69,3 @@ void ws_start()
   ws.begin();
   webServerActive = true;
 }
-
